@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const HOST_URL = "https://7e345cef-9359-46ee-90e1-e7b44648062c-00-1rbfgjdbpmix7.kirk.replit.dev/";
+const HOST_URL = "https://7e345cef-9359-46ee-90e1-e7b44648062c-00-1rbfgjdbpmix7.kirk.replit.dev";
 
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
     const response = await axios.get(HOST_URL + "/events");
@@ -21,7 +21,7 @@ export const updateEventAsync = createAsyncThunk('events/updateEventAsync', asyn
 
 export const deleteEventAsync = createAsyncThunk('events/deleteEventAsync', async (id) => {
     const response = await axios.delete(HOST_URL + `/events/${id}`);
-    return response.data;
+    return {...response.data, id };
 })
 
 const initialState = {
@@ -64,7 +64,7 @@ export const eventSlice = createSlice({
             .addCase(updateEventAsync.fulfilled, (state, action) => {
                 state.status = 'success';
                 const updatedEvent = action.payload;
-                const index = state.patients.findIndex((e) => e._id === updatedEvent._id)
+                const index = state.events.findIndex((e) => e._id === updatedEvent._id)
                 if (index !== -1) {
                     state.events[index] = updatedEvent;
                 }
@@ -78,7 +78,7 @@ export const eventSlice = createSlice({
             })
             .addCase(deleteEventAsync.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.events = state.events.filter((event) => event._id !== action.payload._id)
+                state.events = state.events.filter((event) => event._id !== action.payload.id)
             })
             .addCase(deleteEventAsync.rejected, (state, action) => {
                 state.status = 'error';
