@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import EventView from './components/EventView';
+import VolunteerView from './components/VolunteerView';
+import VolunteerForm from './features/volunteers/volunteerForm';
+import EventForm from './features/events/eventForm';
+import EventDetail from './features/events/eventDetail';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div>
+          Event Volunteer Management
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Events</Link>
+            </li>
+            <li>
+              <Link to='/volunteers'>Volunteers</Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path='/volunteers' element={<VolunteerView />}/>
+          <Route path='/' element={<EventView />} />
+          <Route path='/events/:id' element={<EventDetail/>}/>
+          <Route path='/volunteers/add' element={<VolunteerForm/>} />
+          <Route path='/volunteers/edit/:id' element={<VolunteerForm/>}/>
+          <Route path='/events/add' element={<EventForm/>} />
+          <Route path='/events/edit/:id' element={<EventForm/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
