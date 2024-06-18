@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchEvents } from "../events/eventSlice";
 
-const HOST_URL = "https://7e345cef-9359-46ee-90e1-e7b44648062c-00-1rbfgjdbpmix7.kirk.replit.dev/";
+const HOST_URL = "https://7e345cef-9359-46ee-90e1-e7b44648062c-00-1rbfgjdbpmix7.kirk.replit.dev";
 
 export const fetchVolunteers = createAsyncThunk('volunteers/fetchVolunteers', async () => {
     const response = await axios.get(HOST_URL + "/volunteers");
@@ -22,7 +21,7 @@ export const updateVolunteerAsync = createAsyncThunk('volunteers/updateVolunteer
 
 export const deleteVolunteerAsync = createAsyncThunk('volunteers/deleteVolunteerAsync', async (id) => {
     const response = await axios.delete(HOST_URL + `/volunteers/${id}`);
-    return response.data;
+    return {...response.data, id};
 })
 
 const initialState = {
@@ -41,8 +40,9 @@ export const volunteerSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchVolunteers.fulfilled, (state, action) => {
+                console.log(action,"actn");
                 state.status = 'success';
-                state.events = action.payload
+                state.volunteers = action.payload
             })
             .addCase(fetchVolunteers.rejected, (state, action) => {
                 state.status = 'error';
@@ -79,7 +79,7 @@ export const volunteerSlice = createSlice({
             })
             .addCase(deleteVolunteerAsync.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.volunteers = state.volunteers.filter((volunteer) => volunteer._id !== action.payload._id) 
+                state.volunteers = state.volunteers.filter((volunteer) => volunteer._id !== action.payload.id) 
             })
             .addCase(deleteVolunteerAsync.rejected, (state, action) => {
                 state.status = 'error';

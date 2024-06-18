@@ -5,6 +5,7 @@ import VolunteerView from './components/VolunteerView';
 import VolunteerForm from './features/volunteers/volunteerForm';
 import EventForm from './features/events/eventForm';
 import EventDetail from './features/events/eventDetail';
+import VolunteerDetail from './features/volunteers/volunteerDetail';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/volunteers' element={<VolunteerView />}/>
           <Route path='/' element={<EventView />} />
           <Route path='/events/:id' element={<EventDetail/>}/>
+          <Route path='/volunteers/:id' element={<VolunteerDetail/>}/>
           <Route path='/volunteers/add' element={<VolunteerForm/>} />
           <Route path='/volunteers/edit/:id' element={<VolunteerForm/>}/>
           <Route path='/events/add' element={<EventForm/>} />
