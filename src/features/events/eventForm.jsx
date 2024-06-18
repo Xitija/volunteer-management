@@ -66,7 +66,7 @@ const EventForm = () => {
             <input type = "text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
             <input type = "text" placeholder="Type" value={type} onChange={(e) => setType(e.target.value)}/>
             <div>
-                Required volunteers<br/>
+                <b>Required volunteers</b><br/>
                 {
                     requiredVolunteers?.map((volunteer, index) => (
                         <li key={index}>

@@ -25,7 +25,7 @@ const EventDetail = () => {
             <p>Description: {event.description}</p>
             <p>Type: {event.type}</p>
             <div>
-                Required volunteers<br/>
+                <b>Required volunteers</b><br/>
                 {
                     event?.requiredVolunteers?.map((volunteer, index) => (
                         <li key={index}>
@@ -37,18 +37,19 @@ const EventDetail = () => {
                 }
             </div>
             <div>
-                Registered Volunteers<br/>
+                <b>Registered Volunteers</b><br/>
                 {
-                    event?.registerVolunteers?.map((volunteer) => (
+                    event?.registeredVolunteers?.map(({volunteer, role}) => (
                         volunteer && (
                             <li>
-                                Name: {volunteer.name}
-                                Skills : {JSON.stringify(volunteer.skills)}
-                                Availability: {volunteer.availability}
-                                Areas of interest: {`${volunteer.areasOfInterest}`}
+                                Name: {volunteer.name}<br/>
+                                Skills : {`${volunteer.skills}`}<br/>
+                                Availability: {volunteer.availability}<br/>
+                                Areas of interest: {`${volunteer.areasOfInterest}`}<br/>
                                 Contact Info: 
-                                Email: {volunteer.contactInfo.email}
-                                Phone No: {volunteer.contactInfo.phoneNumber}
+                                Email: {volunteer.contactInfo.email}<br/>
+                                Phone No: {volunteer.contactInfo.phoneNumber}<br/>
+                                Role: {role}
                             </li>
                         )
                     ))
