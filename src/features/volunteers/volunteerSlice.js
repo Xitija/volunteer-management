@@ -40,7 +40,6 @@ export const volunteerSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchVolunteers.fulfilled, (state, action) => {
-                console.log(action,"actn");
                 state.status = 'success';
                 state.volunteers = action.payload
             })

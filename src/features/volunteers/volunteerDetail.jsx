@@ -16,8 +16,6 @@ const VolunteerDetail = () => {
         dispatch(deleteVolunteerAsync(id))
     }
 
-    console.log(volunteer?.assignedEvents," volunteer?.assignedEvents")
-
     return (
         <div>
             <h2>Volunteer Detail</h2>
@@ -30,18 +28,21 @@ const VolunteerDetail = () => {
             Phone No: {volunteer.contactInfo.phoneNumber}
             <div>
                 <b>Assigned Events</b><br/>
+                <ol>
                 {
                     volunteer?.assignedEvents?.map(({event,role}) => (
                         event && (
                             <li key={event._id}>
-                                Name: {event.name}<br/>
+                              <b><u>Name: {event.name}</u></b><br/>
                                 Date: {event.date}<br/>
                                 Location: {event.location}<br/>
                                 Description: {event.description}<br/>
-                                Type: {event.type}
-                                Role: {role}
+                                Type: {event.type}<br/>
+                                <b><u>Role: {role}</u></b><br/>
+                                
                                 <div>
                                     <b>Required volunteers</b><br/>
+                                    <ul>
                                     {
                                         event?.requiredVolunteers?.map((volunteer, index) => (
                                             <li key={index}>
@@ -51,11 +52,13 @@ const VolunteerDetail = () => {
                                             </li>
                                         ))
                                     }
+                                    </ul>
                                 </div>
                             </li>
                         )
                     ))
                 }
+                </ol>
             </div>
             <Link to={`/volunteers/edit/${volunteer._id}`} state={volunteer}>
             Edit Details
