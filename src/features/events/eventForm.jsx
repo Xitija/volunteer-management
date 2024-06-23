@@ -25,14 +25,11 @@ const EventForm = () => {
     const dispatch = useDispatch();
 
     const addVolunteer = () => {
-        console.log(volunteer,"voll")
         setRequiredVolunteers((state) => ([...state, {...volunteer, requiredNumber : parseInt(volunteer.requiredNumber)}]))
         setVolunteer(initialVolunteerState)
-        console.log(requiredVolunteers,"requiredVolunteers")
     }
 
     const removeVolunteer = (volunteer) => {
-        console.log(volunteer,"volunter rem")
         const remainingVolunteers = requiredVolunteers.filter(({roleName}) => roleName !== volunteer.roleName)
         setRequiredVolunteers(remainingVolunteers);
     }
