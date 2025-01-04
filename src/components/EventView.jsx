@@ -27,6 +27,20 @@ const EventView = () => {
             <h3>
                 <Link to={`/events/add`}>Add Event</Link>
             </h3>
+            {error && (
+                <div>
+                    <h2>Server Not Active 😨</h2>
+                    <h3>
+                        <a
+                        href="https://drive.google.com/file/d/18HhVn-pQ-YhYV7Xfo9SJ2OwXIi650T4A/view?usp=drive_link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                        Click here to view video
+                        </a>
+                    </h3>
+                </div>
+            )}
         </div>
     )
 }
